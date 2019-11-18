@@ -1,2 +1,2 @@
 # wikirip react project
-add
+Помощь родным и близким.
