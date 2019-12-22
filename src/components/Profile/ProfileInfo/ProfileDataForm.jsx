@@ -3,38 +3,52 @@ import s from './ProfileInfo.module.css';
 import {createField, Input, Textarea} from "../../common/FormsControls/FormsControls";
 import {reduxForm} from "redux-form";
 import style from "../../common/FormsControls/FormsControls.module.css";
+ 
+import { makeStyles } from '@material-ui/core/styles';  
+import Grid from '@material-ui/core/Grid'; 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    }, 
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '100%',
+    }, 
+}));
 
 const ProfileDataForm = ({handleSubmit, profile, error}) => {
     return <form onSubmit={handleSubmit}>
-        <div><button>save</button></div>
-        {error && <div className={style.formSummaryError}>
+        <Grid><button>save</button></Grid>
+        {error && <Grid className={style.formSummaryError}>
             {error}
-        </div>
+        </Grid>
         }
-        <div>
+        <Grid>
             <b>Full name</b>: {createField("Full name", "fullName", [], Input)}
-        </div>
-        <div>
+        </Grid>
+        <Grid>
             <b>Looking for a job</b>: { createField("", "lookingForAJob", [], Input, {type: "checkbox"} )}
-        </div>
+        </Grid>
 
-        <div>
+        <Grid>
             <b>My professional skills</b>:
             { createField("My professional skills", "lookingForAJobDescription", [], Textarea  )}
-        </div>
+        </Grid>
 
 
-        <div>
+        <Grid>
             <b>About me</b>:
             { createField("About me", "aboutMe", [], Textarea  )}
-        </div>
-        <div>
+        </Grid>
+        <Grid>
             <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-            return <div key={key} className={s.contact}>
+            return <Grid key={key} className={s.contact}>
             <b>{key}: {createField(key, "contacts." + key, [], Input)}</b>
-            </div>
+            </Grid>
         })}
-        </div>
+        </Grid>
     </form>
 }
 

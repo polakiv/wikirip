@@ -1,5 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import s from './ProfileInfo.module.css';
+ 
+import { makeStyles } from '@material-ui/core/styles';  
+import Grid from '@material-ui/core/Grid'; 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    }, 
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '100%',
+    }, 
+}));
 
 
 const ProfileStatusWithHooks = (props) => {
@@ -24,19 +38,19 @@ const ProfileStatusWithHooks = (props) => {
     }
 
     return (
-        <div>
+        <Grid>
             { !editMode &&
-            <div>
+            <Grid>
                 <b>Status: </b> <span onDoubleClick={ activateEditMode }>{props.status || "-------"}</span>
-            </div>
+            </Grid>
             }
             {editMode &&
-            <div>
+            <Grid>
                 <input onChange={onStatusChange} autoFocus={true} onBlur={ deactivateEditMode }
                        value={status} />
-            </div>
+            </Grid>
             }
-        </div>
+        </Grid>
     )
 }
 

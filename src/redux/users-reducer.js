@@ -13,7 +13,7 @@ let initialState = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
-    currentPage: 1,
+    currentPage: "новосибирск",
     isFetching: true,
     followingInProgress: [],
     fake: 10
@@ -35,7 +35,7 @@ const usersReducer = (state = initialState, action) => {
             return {...state, users: action.users}
         }
         case SET_CURRENT_PAGE: {
-            return {...state, currentPage: action.currentPage}
+            return {...state, currentPage: action.currentPage} // сюда прилетает currentPage и помещается в стейт
         }
         case SET_TOTAL_USERS_COUNT: {
             return {...state, totalUsersCount: action.count}
@@ -60,7 +60,7 @@ const usersReducer = (state = initialState, action) => {
 export const followSuccess = (userId) => ({type: FOLLOW, userId})
 export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId})
 export const setUsers = (users) => ({type: SET_USERS, users})
-export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
+export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage}) 
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount})
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 export const toggleFollowingProgress = (isFetching, userId) => ({
@@ -72,14 +72,14 @@ export const toggleFollowingProgress = (isFetching, userId) => ({
 export const requestUsers = (page, pageSize) => {
     return async (dispatch) => {
         dispatch(toggleIsFetching(true));
-        dispatch(setCurrentPage(page));
+        dispatch(setCurrentPage(page)); // вызывает dispatch setCurrentPage
 
         let data = await usersAPI.getUsers(page, pageSize);
         dispatch(toggleIsFetching(false));
         dispatch(setUsers(data.items));
         dispatch(setTotalUsersCount(500));
     }
-}
+} 
 
 const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
     dispatch(toggleFollowingProgress(true, userId));

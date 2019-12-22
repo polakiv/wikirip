@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
-import { HashRouter, Route, withRouter } from "react-router-dom";
-
-import Navbar from './components/Navbar/Navbar';
-import UsersContainer from "./components/Users/UsersContainer";
-import UserHsContainer from "./components/UserHs/UserHsContainer";
-import mainPage from "./components/mainPage/mainPage";
+import './App.css'; 
+import { BrowserRouter, Route, withRouter } from "react-router-dom";
+ 
+import Navbar from './components/Navbar/Navbar'; 
+import UsersContainer from "./components/Users/UsersContainer";  
+import UsersBurialContainer from "./components/UsersBurial/UsersBurialContainer";  
 import SignIn from "./components/SignIn/SignIn";
-import SignUp from "./components/SignUp/SignUp";
+import SignUp from "./components/SignUp/SignUp"; 
+import Addburial from "./components/common/AddBurial/AddBurial"; 
 
 
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -18,6 +18,20 @@ import { initializeApp } from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
 import { withSuspense } from "./hoc/withSuspense";
+ 
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid'; 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    }, 
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '100%',
+    }, 
+}));
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
@@ -35,28 +49,28 @@ class App extends Component {
         }
 
         return (
-            <div className='app-wrapper'>
+            <Grid className='app-wrapper'>
                 <HeaderContainer />
-                <div className='app-wrapper-content'>
+                <Grid className='app-wrapper-content'>
                     <Route path='/dialogs'
                         render={withSuspense(DialogsContainer)} />
                     <Route path='/profile/:userId?'
-                        render={withSuspense(ProfileContainer)} />
-                    <Route path='/users'
-                        render={() => <UsersContainer />} />
+                        render={withSuspense(ProfileContainer)} /> 
+                    <Route path='/addburial'
+                        render={() => <Addburial />} />
                     <Route exact path='/'
-                        render={() => <UserHsContainer />} />
-
-                    <Route exact path='/' component={mainPage} />
+                        render={() => <UsersContainer />} />
+  
                     <Route path='/login'
                         render={() => <LoginPage />} />
                     <Route path='/signin' component={SignIn} />
-                    <Route path='/signup' component={SignUp} />
+                    <Route path='/signup' component={SignUp} /> 
+                    <Route path='/addusersburial' component={UsersBurialContainer} /> 
                     <Navbar />
-                </div>
-            </div>
+                </Grid>
+            </Grid>
         )
-    }
+    } 
 }
 
 const mapStateToProps = (state) => ({
@@ -68,11 +82,11 @@ let AppContainer = compose(
     connect(mapStateToProps, { initializeApp }))(App);
 
 const WikiripJSApp = (props) => {
-    return <HashRouter >
+    return <BrowserRouter >
         <Provider store={store}>
             <AppContainer />
         </Provider>
-    </HashRouter>
+    </BrowserRouter> 
 }
 
 export default WikiripJSApp;

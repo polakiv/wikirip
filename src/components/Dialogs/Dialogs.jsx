@@ -5,6 +5,19 @@ import Message from "./Message/Message";
 import {Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
+ 
+import { makeStyles } from '@material-ui/core/styles';  import Grid from '@material-ui/core/Grid'; 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    }, 
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '100%',
+    }, 
+}));
 
 const Dialogs = (props) => {
 
@@ -21,16 +34,16 @@ const Dialogs = (props) => {
     if (!props.isAuth) return <Redirect to={"/login"} /> ;
 
     return (
-        <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
+        <Grid className={s.dialogs}>
+            <Grid className={s.dialogsItems}>
                 { dialogsElements }
-            </div>
-            <div className={s.messages}>
-                <div>{ messagesElements }</div>
+            </Grid>
+            <Grid className={s.messages}>
+                <Grid>{ messagesElements }</Grid>
 
-            </div>
+            </Grid>
             <AddMessageForm onSubmit={addNewMessage} />
-        </div>
+        </Grid>
     )
 }
 

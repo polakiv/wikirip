@@ -1,5 +1,5 @@
 import React from 'react';
-import Paginator from "../common/Paginator/Paginator";
+import Searchrator from "../common/Searchrator/Searchrator";
 import User from "./User";
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -56,111 +56,34 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 500,
   },
 }));
-let Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}) => {
+let Users = ({totalUsersCount, onPageChanged, users, ...props}) => {
     const classes = useStyles();
-    
- /* const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = React.useState([]);
-  const loading = open && options.length === 0;
-
-  React.useEffect(() => {
-    let active = true;
-
-    if (!loading) {
-      return undefined;
-    }
-
-    (async () => {
-      const response = await fetch('https://country.register.gov.uk/records.json?page-size=5000');
-      await sleep(1e3); // For demo purposes.
-      const countries = await response.json();
-
-      if (active) {
-        setOptions(Object.keys(countries).map(key => countries[key].item[0]));
-      }
-    })();
-
-    return () => {
-      active = false;
-    };
-  }, [loading]);
-
-  React.useEffect(() => {
-    if (!open) {
-      setOptions([]);
-    }
-  }, [open]); */
+   //  debugger;
+   if((users) != null){
     return <div> 
-        <div className='j4444'>
-        <div className={classes.root} id='rootMain'>
-      <Paper className={classes.paper}>
-        <form className={classes.container} noValidate autoComplete="off">
-          <div className="jkl">
-            <div class="vivod">Всего найдено в базе: 332056</div>
-            <TextField
-              id="outlined-basic"
-              className={classes.textField}
-              label="Поиск"
-              margin="normal"
-              variant="outlined"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Искать
-          </Button>
-          </div>
-        </form>
-      </Paper>
-    </div>
-            {
-                users.map(u => <User user={u}
-                                     followingInProgress={props.followingInProgress}
-                                     key={u.id}
-                                     unfollow={props.unfollow}
-                                     follow={props.follow}
-                    />
+        <div className='j4444'> 
+			<div className={classes.root} id='rootMain'>
+				<Searchrator onPageChanged={onPageChanged}
+					   totalItemsCount={totalUsersCount} /> {/* получение всех данных для блока пагинации(вверху стоит импорт) и распечатка блока пагинации Searchrator.jsx */}
+			</div>
+	
+	{/*  if (users) users приходит в пропсах , прилетает сюда */}
+		{
+		 
+		users.map(u => <User user={u}
+							 followingInProgress={props.followingInProgress}
+							 key={u.id}
+							 unfollow={props.unfollow} //unfollow
+							 follow={props.follow}
+			/>
                 )
-            }
-       
-        <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
-                   totalItemsCount={totalUsersCount} pageSize={pageSize}/>
-    </div>  
-   {/* <Autocomplete
-      id="asynchronous-demo"
-      style={{ width: 300 }}
-      open={open}
-      onOpen={() => {
-        setOpen(true);
-      }}
-      onClose={() => {
-        setOpen(false);
-      }}
-      getOptionLabel={option => option.country}
-      options={options}
-      loading={loading}
-      renderInput={params => (
-        <TextField
-          {...params}
-          label="Asynchronous"
-          fullWidth
-          variant="outlined"
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <React.Fragment>
-                {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                {params.InputProps.endAdornment}
-              </React.Fragment>
-            ),
-          }}
-        />
-      )}
-        />*/} 
-        </div>    
+		} 
+        
+			</div>  
+   
+        </div>  
+		} else {
+		return	<div className='j4444'> не найдено</div>
+			}
 }
 export default Users;

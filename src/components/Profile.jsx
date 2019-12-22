@@ -3,9 +3,9 @@ import React from 'react';
 function Profile() {
   return (
     
-	  <div className='content'>
+	  <Grid className='content'>
 	 
-	  </div>
+	  </Grid>
   );
 }
 

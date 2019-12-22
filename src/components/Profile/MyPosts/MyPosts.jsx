@@ -1,21 +1,35 @@
 import React from 'react';
 import s from './MyPosts.module.css';
-import Post from './Post/Post';
+import Post from './Post/Post'; // приходит распечатка готового текста
 import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
+ 
+import { makeStyles } from '@material-ui/core/styles';  
+import Grid from '@material-ui/core/Grid'; 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    }, 
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '100%',
+    }, 
+}));
 
 const maxLength10 = maxLengthCreator(10);
 
 let AddNewPostForm = (props) => {
     return <form onSubmit={props.handleSubmit}>
-        <div>
+        <Grid>
             <Field name="newPostText" component={Textarea} placeholder={"Post message"}
                    validate={[required, maxLength10]} />
-        </div>
-        <div>
-            <button>Add post</button>
-        </div>
+        </Grid>
+        <Grid>
+            <button>Add post2222222222</button>
+        </Grid>
     </form>;
 }
 
@@ -34,13 +48,13 @@ const MyPosts = React.memo(props => {
     }
 
     return (
-        <div className={s.postsBlock}>
+        <Grid className={s.postsBlock}>
             <h3>My posts</h3>
             <AddNewPostFormRedux onSubmit={onAddPost}/>
-            <div className={s.posts}>
+            <Grid className={s.posts}>
                 {postsElements}
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     )
 });
 

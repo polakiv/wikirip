@@ -6,6 +6,19 @@ import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import style from "./../common/FormsControls/FormsControls.module.css"
+ 
+import { makeStyles } from '@material-ui/core/styles';  import Grid from '@material-ui/core/Grid'; 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    }, 
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '100%',
+    }, 
+}));
 
 const LoginForm = ({handleSubmit, error}) => {
     return (
@@ -14,13 +27,13 @@ const LoginForm = ({handleSubmit, error}) => {
             {createField("Password", "password", [required], Input, {type: "password"})}
             {createField(null, "rememberMe", [], Input, {type: "checkbox"}, "remember me")}
 
-            {error && <div className={style.formSummaryError}>
+            {error && <Grid className={style.formSummaryError}>
                 {error}
-            </div>
+            </Grid>
             }
-            <div>
+            <Grid>
                 <button>Login</button>
-            </div>
+            </Grid>
         </form>
     )
 }
@@ -36,10 +49,10 @@ const Login = (props) => {
         return <Redirect to={"/profile"}/>
     }
 
-    return <div>
+    return <Grid>
         <h1>Login</h1>
         <LoginReduxForm onSubmit={onSubmit}/>
-    </div>
+    </Grid>
 }
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth

@@ -8,23 +8,23 @@ const BurialDetail = () => {
  //   let postElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} id={p.id}/>)
 
     return (
-        <div className="BurialDetail">
+        <Grid className="BurialDetail">
             <h3>Здесь будет название местоположения</h3> 
-            <div className="ulogi">
+            <Grid className="ulogi">
                  тыры рым 
-            <div>
-                <div>
+            <Grid>
+                <Grid>
                     <input />
-                 </div>
-                <div>
+                 </Grid>
+                <Grid>
                     <button>Add post</button>
-                </div>
-            </div>
-            <div className="posts">
+                </Grid>
+            </Grid>
+            <Grid className="posts">
               
-            </div> 
-        </div>
-        </div>
+            </Grid> 
+        </Grid>
+        </Grid>
     )
 }
 

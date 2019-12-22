@@ -1,4 +1,17 @@
 import React from 'react';
+ 
+import { makeStyles } from '@material-ui/core/styles';  import Grid from '@material-ui/core/Grid'; 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    }, 
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '100%',
+    }, 
+}));
 
 class ProfileStatus extends React.Component {
     state = {
@@ -37,20 +50,20 @@ class ProfileStatus extends React.Component {
     render() {
 
         return (
-            <div>
+            <Grid>
                 {!this.state.editMode &&
-                <div>
+                <Grid>
                     <span onDoubleClick={this.activateEditMode}>{this.props.status || "-------"}</span>
-                </div>
+                </Grid>
                 }
                 {this.state.editMode &&
-                <div>
+                <Grid>
                     <input onChange={this.onStatusChange} autoFocus={true}
                            onBlur={this.deactivateEditMode.bind(this)}
                            value={this.state.status}/>
-                </div>
+                </Grid>
                 }
-            </div>
+            </Grid>
         )
     }
 }

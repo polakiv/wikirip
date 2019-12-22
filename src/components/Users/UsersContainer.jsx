@@ -14,31 +14,33 @@ import {
     getIsFetching,
     getPageSize,
     getTotalUsersCount, getUsers
-} from "../../redux/users-selectors";
+} from "../../redux/users-selectors"; // приходят данные, необходимые для отрисовки блока...
 
 
 class UsersContainer extends React.Component {
-    componentDidMount() {
+    componentDidMount() { // первоначальная отрисовка видимо
         const {currentPage, pageSize} = this.props;
         this.props.getUsers(currentPage, pageSize);
     }
 
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (pageNumber) => {// сработанный коллбэк с параметром номера страницы
         const {pageSize} = this.props;
-        this.props.getUsers(pageNumber, pageSize);
+        this.props.getUsers(pageNumber); // дальше летит два параметра pageNumber, pageSize
     }
-
+/* распечатка пришедших из redux/users-reducer */ 
+debugger;
     render() {
-
+	
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
+			
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
                    onPageChanged={this.onPageChanged}
                    users={this.props.users}
-                   follow={this.props.follow}
-                   unfollow={this.props.unfollow}
+                   follow={this.props.follow} 
+                   unfollow={this.props.unfollow} 
                    followingInProgress={this.props.followingInProgress}
             />
         </>

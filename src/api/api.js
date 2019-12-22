@@ -10,42 +10,29 @@ const instance = axios.create({
  
 
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 10) {
-        return axios.get(`https://wikirip.site/index.php?route=api/getthree&page=${currentPage}&limit=${pageSize}`)
+    getUsers(currentPage) {
+        return axios.get(`https://wikirip.site/index.php?route=api/searchten&searchhome=${currentPage}`)
             .then(response => {
                 return response.data;
             });
     },
+  //  getUsers(currentPage = 1, pageSize = 10) {
+    //    return axios.get(`https://wikirip.site/index.php?route=api/getthree&page=${currentPage}&limit=${pageSize}`)
+      //      .then(response => {
+        //        return response.data;
+          //  });
+//},
     follow(userId) {
-        return axios.get(`https://wikirip.site/index.php?route=api/addwishlist&customer_id=3&product_id=${userId}`)
+        return axios.post(`https://wikirip.site/index.php?route=api/addwishlist&customer_id=3&product_id=${userId}`)
     },
     unfollow(userId) {
-        return axios.get(`https://wikirip.site/index.php?route=api/removewishlist&customer_id=3&product_id=${userId}`)
+        return axios.delete(`https://wikirip.site/index.php?route=api/removewishlist&customer_id=3&product_id=${userId}`)
     },
     getProfile(userId) {
         console.warn('Obsolete method. Please profileAPI object.')
         return profileAPI.getProfile(userId);
     }
-} 
-
-export const userHsAPI = {
-    getUserHs(currentPage = 1, pageSize = 10) {
-        return axios.get(`https://wikirip.site/index.php?route=api/getthree&page=${currentPage}&limit=${pageSize}`)
-            .then(response => {
-                return response.data;
-            });
-    },
-    follow(userHId) {
-        return axios.post(`https://wikirip.site/index.php?route=api/addwishlist&customer_id=3&product_id=${userHId}`)
-    },
-    unfollow(userHId) {
-        return axios.delete(`https://wikirip.site/index.php?route=api/removewishlist&customer_id=3&product_id=${userHId}`)
-    },
-    getProfile(userHId) {
-        console.warn('Obsolete method. Please profileAPI object.')
-        return profileAPI.getProfile(userHId);
-    }
-} 
+}
 
 export const profileAPI = {
     getProfile(userId) {
@@ -86,4 +73,3 @@ export const authAPI = {
 }
 
 
- 

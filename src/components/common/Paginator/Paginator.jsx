@@ -2,16 +2,16 @@ import React, {useState} from 'react';
 import styles from "./Paginator.module.css";
 import cn from "classnames";
 
-let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
+let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => { // onPageChanged помещается в пропсах  и экспортируется...
 
-    let pagesCount = Math.ceil(totalItemsCount / pageSize);
+    let pagesCount = Math.ceil(totalItemsCount / pageSize); // делим общее количество на количество юзеров 500, на количество выводимых юзеров в одном блоке, то есть 10, и то есть получается 50 
 
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
+        pages.push(i); // вставляем  циклом один блок 
     }
 
-    let portionCount = Math.ceil(pagesCount / portionSize);
+    let portionCount = Math.ceil(pagesCount / portionSize); // считаем сколько получается блочков , делим количество 
     let [portionNumber, setPortionNumber] = useState(1);
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
     let rightPortionPageNumber = portionNumber * portionSize;
@@ -26,16 +26,16 @@ let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portion
                 .map((p) => {
                 return <span className={ cn({
                     [styles.selectedPage]: currentPage === p
-                }, styles.pageNumber) }
+                }, styles.pageNumber) }// currentPage до самой апишки, летит из пагинатора в Users. jsx, из Users. jsx 
                              key={p}
                              onClick={(e) => {
-                                 onPageChanged(p);
+                                 onPageChanged(p); 
+								 //  при клике срабатывает коллбэк onPageChanged
+								 // передается в пропсах let Paginator и экпортируется
                              }}><span>{p}</span></span>
             })}
         { portionCount > portionNumber &&
-            <button onClick={() => { setPortionNumber(portionNumber + 1) }}> след</button> }
-
-
+            <button onClick={() => { setPortionNumber(portionNumber + 1) }}> след</button> } 
     </div>
 }
 

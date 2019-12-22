@@ -2,8 +2,8 @@ import React from 'react';
 import userPhoto from "../../assets/images/placeholder.png";
 import { NavLink } from "react-router-dom";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';  import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';  import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
@@ -58,12 +58,12 @@ let Search = (props) => {
     pages.push(i);
   }
 
-  return <div>
-    <div className={classes.root} id='rootMain'>
+  return <Grid>
+    <Grid className={classes.root} id='rootMain'>
       <Paper className={classes.paper}>
         <form className={classes.container} noValidate autoComplete="off">
-          <div className="jkl">
-            <div class="vivod">Всего найдено в базе: 332056</div>
+          <Grid className="jkl">
+            <Grid class="vivod">Всего найдено в базе: 332056</Grid>
             <TextField
               id="outlined-basic"
               className={classes.textField}
@@ -80,12 +80,12 @@ let Search = (props) => {
             >
               Искать
           </Button>
-          </div>
+          </Grid>
         </form>
       </Paper>
-    </div>
+    </Grid>
     {
-      props.searchusers.map(u => <div className={classes.root} id='rootMain' key={u.id}>
+      props.searchusers.map(u => <Grid className={classes.root} id='rootMain' key={u.id}>
         <Paper className={classes.paper}>
           <Grid container spacing={2}>
             <Grid item>
@@ -142,8 +142,8 @@ let Search = (props) => {
             </Grid>
           </Grid>
         </Paper>
-      </div>)
+      </Grid>)
     }
-  </div>
+  </Grid>
 }
 export default Search;

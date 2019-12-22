@@ -1,12 +1,25 @@
 import React from 'react';
+ 
+import { makeStyles } from '@material-ui/core/styles';  import Grid from '@material-ui/core/Grid'; 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    }, 
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        width: '100%',
+    }, 
+}));
 
 function MyPosts() {
   return (
-    <div className='myposts'>
+    <Grid className='myposts'>
       <h3 className='vivod'>Всего найдено в базе: 260188</h3>
       <section className='left'>
-        <div className='header-view__main-layout'>
-          <div className='header-view__form-layout'>
+        <Grid className='header-view__main-layout'>
+          <Grid className='header-view__form-layout'>
             <p className='adds poisk poisk2'>Добавьте местоположение, но вначале войдите при помощи соцсетей</p>
             <p className='poisk'>Искать:</p>
             <form method='get'>
@@ -21,10 +34,10 @@ function MyPosts() {
                  </ul> 
                   <input className='poisksubmit' type='submit' name='search3' value='Искать' />  
             </form>
-          </div>  
-        </div>  
+          </Grid>  
+        </Grid>  
        </section>
-    </div>
+    </Grid>
           );
         }
         
